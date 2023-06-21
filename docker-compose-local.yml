@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - django_dos_postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - src/.env
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    env_file:
+      - src/.env   
+    ports:
+      - "5050:80"
+    volumes:
+      - django_dos_pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  django_dos_postgres_data:
+  django_dos_pgadmin_data:
